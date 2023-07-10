@@ -1,0 +1,108 @@
+React JS
+============
+
+1.HTML5 and CSS
+2.Java Script / Typescript
+
+===================================
+
+UI Development : types 
+1.server side render
+	-> dabases + api design
+2.client side render
+	-> only client code. 
+
+
+React Js library
+==================
+-> React js is client side single page development(SPA) library
+-> Minimise DOM (Document object model) manipulations
+
+ types of web app design technologies
+ =========================================
+ 1.MVC/ MVVM (Model view controller / Model View&view Model) based
+ 2.Component based 
+
+ Note: 
+ 	-> Model measn a .js file contaning main bisiness logic
+ 	-> view means a page where model data is rendering/loading
+ 	-> controller means who decides what model has to execute
+ 	   depending on the event/request 
+
+  MVC / MVVM based technologies advantages: 
+  ============================================
+  -> easy to maintain code
+  -> debug / error handling are much easier 
+
+  issues
+  =======
+  1.dependency issues
+  2.development  techologies are difficult
+
+
+  Component based arch
+  =========================
+  
+  principles of a component
+  ------------------------------
+  -> single responsibility
+  -> re-usesability
+
+  Ex: HTML5 is component based design
+  -> <h1 align='center'> is only habdle single responsibility
+  -> <h1> is re-usesablecomponent
+
+ ex: <employee id="1"> </employee>
+ 	 <employee id="2"> </employee>
+     <product> </product>
+
+
+   component based technologies examples
+   =========================================
+   1.react js library  :: facebook
+   2.angular framework :: google
+   3.vue.js
+
+
+   1.react js library
+   =========================
+
+
+software
+============
+1.node js
+2.vs code editor
+3.chrome browser
+
+
+
+
+
+
+
+
+
+
+
+
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
