@@ -4,9 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>JS-clock</h1> <hr/>
-    <script src="./index.js"></script>
+<body class="container">
+    <h1>JS-Clock</h1> <hr/>
+
+    <div class="row">
+        <div id='indianClock' class="col-4"></div>
+        <div id='dubaiClock' class="col-4"></div>
+        <div id='usClock' class="col-4"></div>
+    </div>
+<hr/>
+    <h1>React-Clock</h1> <hr/>
+
+    <div class="row">
+        <div id='indianClockv1' class="col-4"></div>
+        <div id='dubaiClockv1' class="col-4"></div>
+        <div id='usClockv1' class="col-4"></div>
+    </div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./index.js" type="text/babel"></script>
 </body>
 </html>
