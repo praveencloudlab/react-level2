@@ -1,0 +1,12 @@
+Props and state menagement
+================================
+state means data: 
+
+note:
+By default, when ever rendered data is updated, react js component is not reloaded / rendered with new changes
+
+solution: use state or new props to render the component for each update 
+
+
+Props: used to pass data from parent component to child component
+
