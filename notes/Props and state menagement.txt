@@ -9,4 +9,8 @@ solution: use state or new props to render the component for each update
 
 
 Props: used to pass data from parent component to child component
+to pass/send data back to parent from child component, react js uses
+custom events (create a function in parent and invoke it from child by passing data to parent function)
+
+
 
