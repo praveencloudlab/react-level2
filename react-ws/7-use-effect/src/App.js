@@ -6,12 +6,16 @@ const App = () => {
   const[even,setEven]=useState(2);
   const[users,setUsers]=useState([]);
 
+  async function loadUsers() {
+    const data = await fetch('https://jsonplaceholder.typicode.com/users')
+     return data.json();
+  }
+
   // to execute statemets on only once in life cycle
   useEffect(()=>{
    // console.log(">> only once");
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response=>response.json())
-    .then(userResp=>setUsers(userResp))
+    loadUsers()
+    .then(users =>setUsers(users))
   },[])
 
   // every time invokes on every state changes
@@ -38,7 +42,7 @@ const App = () => {
   return users.map(user=>{
     return(
       <>
-        <li>{user.name}</li>
+        <li >{user.name}</li>
       </>
     )
   })
