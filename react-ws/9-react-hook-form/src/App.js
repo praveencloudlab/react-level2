@@ -1,11 +1,20 @@
 import React from 'react';
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 const App = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit,control, watch, formState: { errors } } = useForm({mode:'onChange'})
   const handleUser = (user) => console.log(user)
   
+  const countryStates={
+    USA:['New York','California','Texas','Utah','Vermont','Virginia'],
+    INDIA:['Tamilnadu','Bangalore','Kerala','Panjab','West Bengal'],
+    Canada:['Ontario','Quebec','Alberta']
+  }
 
+  const country=watch("country")
+  const states=country?countryStates[country]:[];
+
+  //const states=country?
   return (
     <div className='container'>
       <h1>use-form-hook</h1> <hr/>
@@ -38,10 +47,31 @@ const App = () => {
                   {errors.age?.type === "required" && (<>Age is required</>)}
                   {errors.age?.type === "min" && (<>Age shouble be minimum 18 years</>)}
                   {errors.age?.type === "max" && (<>Age shouble not be more than 99 years</>)}
-
-
               </div>
           </div>
+          <div>
+                <select {...register("country")}>
+                  <option value="">Select country...</option>
+                 {
+                  Object.keys(countryStates).map((country)=>(
+                    <option key={country} value={country}>{country}</option>
+                  ))
+                 }
+                </select>
+                <br/>
+                <Controller 
+                    name="state" 
+                    control={control}
+                    render={({field})=>(
+                      <select {...field}>
+                          <option>Select state...</option>
+                          {states.map((state)=>(
+                            <option>{state}</option>
+                          ))}
+                      </select>
+                    )}
+                />
+              </div>
 
           <div>
             <button>Save</button>
