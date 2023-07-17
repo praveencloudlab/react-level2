@@ -30,27 +30,33 @@ const App = () => {
 
       <h1>Product Form</h1>
 
-<form>
-    <label>categories</label>
-    <select id="category" {...register('category')}>
-      {
-        categories.map((category)=>(
-          <option>{category.categoryTitle}</option>
-        ))
-      }
-    </select>
 
-    <label>Brand</label> 
-    <select id="brand" {...register('brand')}>
-      {
-        categories.map((category)=>category.categoryId.toString()===watch('category')?(
-          category.brands.map((brand)=>(
-            <option>{brand.brandTitle}</option>
-          ))
-        ):null)
-        )}
-    </select>
-  </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+          <label htmlFor="category">Category:</label>
+          <select id="category" {...register('category')}>
+            {categories.map((category) => (
+              <option key={category.categoryId} value={category.categoryId}>
+                {category.categoryTitle}
+              </option>
+            ))}
+          </select>
+          <br/>
+          <label htmlFor="brand">Brand:</label>
+          <select id="brand" {...register('brand')}>
+            {categories.map((category) =>
+              category.categoryId.toString() === watch('category') ? (
+                category.brands.map((brand) => (
+                  <option key={brand.brandId} value={brand.brandId}>
+                    {brand.brandTitle}
+                  </option>
+                ))
+              ) : null
+            )}
+          </select>
+
+          <button type="submit">Submit</button>
+        </form>
+
       
     </div>
   );
