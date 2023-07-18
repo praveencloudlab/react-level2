@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import {useForm} from 'react-hook-form'
+import axios from 'axios';
+import ProductService from './api/ApiService'
 
 const App = () => {
 
@@ -9,24 +11,15 @@ const App = () => {
     fetchCategories();
   },[])
 
-  const fetchCategories= async()=>{
-    try{
-      const response=await fetch('http://localhost:8080/api/products/withBrands');
-      const data=await response.json();
-      setCategories(data);
-
-    }catch(error){
-      console.log(error);
-    }
+  const fetchCategories= ()=>{
+     ProductService.getCategories()
+     .then(response => setCategories(response.data))
   }
 
-  async function saveProduct(product){
-    console.log(">>>> save product <<<<<<");
-    const resp=await fetch('http://localhost:8080/api/products',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(product)});
-    const products=await resp.json();
-
-    console.log(products);
-
+   function saveProduct(product){
+    ProductService.createProduct(product)
+    .then(response=>console.log(response.data))
+    .then(error=>console.log(error));
   }
 
   const onSubmit=(data)=>{
@@ -39,24 +32,21 @@ const App = () => {
     <div className='container'>
 
       <h1>Product Form</h1>
-
-
       <form onSubmit={handleSubmit(onSubmit)}>
 
-       
       <label>Product Title:</label>
-      <input defaultValue='Iphone' {...register("productTitle", { required: true })} />
+      <input  {...register("productTitle", { required: true })} />
       {errors.productTitle && <p>This field is required</p>}
       <br/>
       <label>Rating:</label>
-      <input defaultValue={0.0} {...register("rating", { required: true })} />
+      <input  {...register("rating", { required: true })} />
       {errors.rating && <p>This field is required</p>}
       <br/>
       <label>Description:</label>
-      <textarea defaultValue='Blue Color' {...register("description")} />
+      <textarea  {...register("description")} />
       <br/>
       <label>Keywords:</label>
-      <textarea defaultValue='Iphone' {...register("keywords")} />
+      <textarea  {...register("keywords")} />
       <br/>
       <label>Price:</label>
       <input {...register("price", { required: true })} />
