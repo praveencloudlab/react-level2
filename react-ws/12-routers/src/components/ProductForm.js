@@ -5,15 +5,28 @@ import { useNavigate,useParams } from 'react-router-dom';
 const ProductForm = () => {
     const{register,handleSubmit,watch,formState: { errors }}=useForm();
     const [categories, setCategories] = useState([]);
+    const[product,setProduct] = useState({});
+
     const navigate=useNavigate();
     const{pid}=useParams()
     useEffect(()=>{
         if(pid){
             console.log(">>>> EDIT : "+pid);
+            fetchCategories();
+            ProductService.getProductById(pid)
+            .then(response=>{
+              console.log(response.data);
+              setProduct(response.data);
+
+            })
+
+
           }else{
             console.log(">>> SAVE");
+            fetchCategories();
+            setProduct({})
           }  
-      fetchCategories();
+     
     },[])
     
     const fetchCategories= ()=>{
@@ -31,33 +44,39 @@ const ProductForm = () => {
     
     const onSubmit=(data)=>{
       console.log(data);
-      saveProduct(data);
-      navigate('/products')
+      if(pid){
+        ProductService.updateProduct(pid,data);
+        navigate('/products')
+      }else{
+        saveProduct(data);
+        navigate('/products')
+      }
+      
     }
     return (
         <div>
            <form onSubmit={handleSubmit(onSubmit)}>
 
 <label>Product Title:</label>
-<input  {...register("productTitle", { required: true })} />
+<input defaultValue={product.productTitle}  {...register("productTitle", { required: true })} />
 {errors.productTitle && <p>This field is required</p>}
 <br/>
 <label>Rating:</label>
-<input  {...register("rating", { required: true })} />
+<input defaultValue={product.rating}  {...register("rating", { required: true })} />
 {errors.rating && <p>This field is required</p>}
 <br/>
 <label>Description:</label>
-<textarea  {...register("description")} />
+<textarea  defaultValue={product.description} {...register("description")} />
 <br/>
 <label>Keywords:</label>
-<textarea  {...register("keywords")} />
+<textarea defaultValue={product.keywords} {...register("keywords")} />
 <br/>
 <label>Price:</label>
-<input {...register("price", { required: true })} />
+<input defaultValue={0} {...register("price", { required: true })} />
 {errors.price && <p>This field is required</p>}
 <br/>
 <label>Stock:</label>
-<input {...register("stock", { required: true })} />
+<input defaultValue={0}{...register("stock", { required: true })} />
 {errors.stock && <p>This field is required</p>}
 <br/>
 
@@ -75,7 +94,7 @@ const ProductForm = () => {
       {categories.map((category) =>
         category.categoryId.toString() === watch('category') ? (
           category.brands.map((brand) => (
-            <option key={brand.brandId} value={brand.brandId}>
+            <option key={product.produtId} value={brand.brandId}>
               {brand.brandTitle}
             </option>
           ))
